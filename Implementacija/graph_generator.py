@@ -2,7 +2,7 @@ from copy import deepcopy
 import random
 
 
-def generate_graph(question_dict: dict[str, tuple[int, int, str, tuple[str, str, str, str]]],
+def generate_graph(question_dict: dict[str, tuple[int, int, str, str, tuple[str, str, str]]],
                    number_of_easy_questions: int,
                    number_of_medium_questions: int,
                    number_of_hard_questions: int,
@@ -27,7 +27,7 @@ def generate_graph(question_dict: dict[str, tuple[int, int, str, tuple[str, str,
     return generated_graph
 
 
-def append_random_question_to_list_by_difficulty_and_question_group(question_dict: dict[str, tuple[int, int, str, tuple[str, str, str, str]]], questions: list, difficulty: int, remaining_question_groups: list[int], question_groups: list[int]) -> None:
+def append_random_question_to_list_by_difficulty_and_question_group(question_dict: dict[str, tuple[int, int, str, str, tuple[str, str, str]]], questions: list, difficulty: int, remaining_question_groups: list[int], question_groups: list[int]) -> None:
     questions_with_selected_difficulty_and_valid_group = [(number_of_question, question_data[0]) for number_of_question, question_data in question_dict.items(
     ) if ((not remaining_question_groups and question_data[0] in question_groups) or question_data[0] in remaining_question_groups) and question_data[1] == difficulty]
     random_question = random.choice(
@@ -37,7 +37,7 @@ def append_random_question_to_list_by_difficulty_and_question_group(question_dic
     questions.append(random_question[0])
 
 
-def append_many_random_questions_to_list_by_difficulty_and_question_group(question_dict: dict[str, tuple[int, int, str, tuple[str, str, str, str]]], questions: list, difficulty: int, remaining_question_groups: list[int], question_groups: list[int], number_of_questions: int) -> None:
+def append_many_random_questions_to_list_by_difficulty_and_question_group(question_dict: dict[str, tuple[int, int, str, str, tuple[str, str, str]]], questions: list, difficulty: int, remaining_question_groups: list[int], question_groups: list[int], number_of_questions: int) -> None:
     while number_of_questions > 0:
         append_random_question_to_list_by_difficulty_and_question_group(
             question_dict, questions, difficulty, remaining_question_groups, question_groups)

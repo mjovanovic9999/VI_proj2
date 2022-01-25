@@ -3,6 +3,9 @@ from typing import Callable
 def show_start_screen() -> None:
     print("Dobrodošli u ČŠ generator testova :)")
 
+def show_end_screen() -> None:
+    print("Testovi generisani!:)")
+    
 def read_input_untill_valid(message: str, error_message: str, condition: Callable[[str], bool]) -> str:
     read_input = input(message + ":")
     if condition(read_input):

@@ -42,7 +42,7 @@ def add_answer_nodes_to_stack(stack: LifoQueue, node: tuple[int,int,int], graph:
 
 def depth_first_search(graph:  dict[tuple[int,int,int], tuple[list[tuple[int,int,int]], list[str]]], node_order: list[str]) -> list[tuple[tuple[int,int,int],str]]:
 
-    stack_nodes = LifoQueue(len(graph))
+    stack_nodes = LifoQueue()
     visited = set()
     prev_nodes = dict()
     prev_nodes[node_order[0]] = None
@@ -55,7 +55,7 @@ def depth_first_search(graph:  dict[tuple[int,int,int], tuple[list[tuple[int,int
         node = stack_nodes.get()
 
         if forward_checking(graph, node[0], node[1], visited):
-            visited.add(node)
+            visited.add(node[0])
             if node_order.index(node[0]) < len(node_order) - 1:
                 destination = node_order[node_order.index(node[0]) + 1]
                 prev_nodes[destination] = node
@@ -65,9 +65,9 @@ def depth_first_search(graph:  dict[tuple[int,int,int], tuple[list[tuple[int,int
 
     if graph_answered:
         path.append(node)
-        prev = prev_nodes(node)
+        prev = prev_nodes[node[0]]
         while prev is not None:
             path.append(prev)
-            prev = prev_nodes[prev]
+            prev = prev_nodes[prev[0]]
         path.reverse()
     return path

@@ -1,9 +1,9 @@
 import os
 from tokenize import group
 from csp import answer_graph
-from file_manipulator import read_questions_from_file
+from file_manipulator import read_questions_from_file, store_test_combinations_to_files, store_test_to_file
 from graph_generator import generate_graph
-from view import read_input_untill_valid, show_start_screen
+from view import read_input_untill_valid, show_end_screen, show_start_screen
 
 
 def main() -> None:
@@ -52,13 +52,20 @@ def main() -> None:
             print("Izbacili ste sve oblasti!")
 
     question_graphs = []
-    while number_of_questions > 0:
+    while number_of_tests > 0:
         question_graphs.append(generate_graph(question_dict, number_of_easy_questions, number_of_medium_questions,
                                number_of_hard_questions, question_groups, number_of_combinations, number_of_questions))
-        number_of_questions -= 1
+        number_of_tests -= 1
 
-    combination = answer_graph(question_graphs[0])
+    test_combinations = []
+    for question_graph in question_graphs:
+        test_combinations.append(answer_graph(question_graph))
 
-    print(combination)
+    counter = 1
+    for test_combination in test_combinations:
+        test_name = "Test_"+str(counter)
+        counter += 1
+        store_test_combinations_to_files(test_name, destination_folder, number_of_combinations, question_dict, test_combination)
 
+    show_end_screen()
 
