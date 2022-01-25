@@ -29,7 +29,7 @@ def restore_answer_options(graph: dict[tuple[int,int,int], tuple[list[tuple[int,
 
 
 def create_graph_with_answer_options(graph: dict[tuple[int,int,int], list[tuple[int,int,int]]]) -> dict[tuple[int,int,int], tuple[list[tuple[int,int,int]], list[str]]]:
-    graph_with_answer_options = []
+    graph_with_answer_options = {}
     for node in list(graph.keys()):
         graph_with_answer_options[node] = (graph[node], ["A", "B", "C", "D"])
     return graph_with_answer_options
