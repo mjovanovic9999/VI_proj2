@@ -1,6 +1,6 @@
 from queue import LifoQueue
 
-def color_graph(graph: dict[str, list[str]]) -> None:
+def answer_graph(graph: dict[str, list[str]]) -> None:
     return
 
 def degree_heuristic(graph: dict[str, list[str]]) -> list[str]:
@@ -8,30 +8,30 @@ def degree_heuristic(graph: dict[str, list[str]]) -> list[str]:
     nodes.sort(key=lambda cvor: len(graph[cvor]), reverse=True)
     return nodes
 
-def forward_checking(graph:dict[str, tuple[list[str], list[str]]], node: str, color: str, visited_nodes: set[str]) -> bool:
+def forward_checking(graph:dict[str, tuple[list[str], list[str]]], node: str, answer: str, visited_nodes: set[str]) -> bool:
     for neighbor in graph[node][0]:
         if neighbor not in visited_nodes:
-            if color in graph[neighbor][1]:
+            if answer in graph[neighbor][1]:
                 if len(graph[neighbor][1]) == 1:
-                    restore_color_options(graph, (node, color))
+                    restore_answer_options(graph, (node, answer))
                     return False
-                graph[neighbor][1].remove(color)    
+                graph[neighbor][1].remove(answer)    
     return True
 
-def restore_color_options(graph:dict[str, tuple[list[str], list[str]]], colored_node: tuple[str,str]) -> None:
-    for neighbor in graph[colored_node[0]][0]:
-            if colored_node[1] not in graph[neighbor][1]:
-                graph[neighbor][1].append(colored_node[1])
+def restore_answer_options(graph:dict[str, tuple[list[str], list[str]]], answered_node: tuple[str,str]) -> None:
+    for neighbor in graph[answered_node[0]][0]:
+            if answered_node[1] not in graph[neighbor][1]:
+                graph[neighbor][1].append(answered_node[1])
 
-def create_graph_with_color_options(graph: dict[str, list[str]]) -> dict[str, tuple[list[str], list[str]]]:
-    graph_with_color_options = dict[str, tuple[list[str], list[str]]]()
+def create_graph_with_answer_options(graph: dict[str, list[str]]) -> dict[str, tuple[list[str], list[str]]]:
+    graph_with_answer_options = dict[str, tuple[list[str], list[str]]]()
     for node in list(graph.keys()):
-        graph_with_color_options[node] = (graph[node], ["R", "G", "B"])      
-    return graph_with_color_options
+        graph_with_answer_options[node] = (graph[node], ["A", "B", "C", "D"])      
+    return graph_with_answer_options
 
-def add_rgb_nodes_to_stack(stack: LifoQueue, node: str, graph: dict[str, tuple[list[str], list[str]]]):
-    for color in reversed(graph[node][1]):
-        stack.put((node, color))
+def add_answer_nodes_to_stack(stack: LifoQueue, node: str, graph: dict[str, tuple[list[str], list[str]]]):
+    for answer in reversed(graph[node][1]):
+        stack.put((node, answer))
 
 #def add_prev_nodes_to_dict(prev_nodes : dict[tuple[str, str], list[tuple[str,str]]], prev: tuple[str,str], node: str):
  #   for 
@@ -43,19 +43,20 @@ def depth_first_search(graph: dict[str, tuple[list[str], list[str]]], node_order
     visited = set()
     prev_nodes = dict()
     prev_nodes[node_order[0]] = None
-    add_rgb_nodes_to_stack(stack_nodes, node_order[0], graph)
-    graph_colored = False
+    add_answer_nodes_to_stack(stack_nodes, node_order[0], graph)
+    graph_answered = False
+    
+    path = list()
 
-    while not graph_colored and not stack_nodes.empty():
+    while not graph_answered and not stack_nodes.empty():
         node = stack_nodes.get()
         
         if forward_checking(graph, node[0], node[1], visited):
             destination = node_order[node_order.index(node[0]) + 1]
-            add_rgb_nodes_to_stack(stack_nodes, destination, graph)
+            add_answer_nodes_to_stack(stack_nodes, destination, graph)
             prev_nodes[destination] = node
 
-            
-        path = list()
+        
         # if found_dest:
         #     path.append(end)
         #     prev = prev_nodes[end]
