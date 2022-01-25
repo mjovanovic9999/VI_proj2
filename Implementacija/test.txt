@@ -5,12 +5,85 @@
 "Netacno"
 "Netacno"
 
-
-
-2. 3 1
+2. 2 1
 "asdasdasd"
 "Tacno"
 "Netacno"
 "Netacno"
 "Netacno"
+
+3. 3 1
+"asdasdasd"
+"Tacno"
+"Netacno"
+"Netacno"
+"Netacno"
+
+4. 4 1
+"asdasdasd"
+"Tacno"
+"Netacno"
+"Netacno"
+"Netacno"
+
+5. 1 2
+"asdasdasd"
+"Tacno"
+"Netacno"
+"Netacno"
+"Netacno"
+
+6. 2 2
+"asdasdasd"
+"Tacno"
+"Netacno"
+"Netacno"
+"Netacno"
+
+7. 3 2
+"asdasdasd"
+"Tacno"
+"Netacno"
+"Netacno"
+"Netacno"
+
+8. 4 2
+"asdasdasd"
+"Tacno"
+"Netacno"
+"Netacno"
+"Netacno"
+
+
+9. 1 3
+"asdasdasd"
+"Tacno"
+"Netacno"
+"Netacno"
+"Netacno"
+
+10. 2 3
+"asdasdasd"
+"Tacno"
+"Netacno"
+"Netacno"
+"Netacno"
+
+11. 3 3
+"asdasdasd"
+"Tacno"
+"Netacno"
+"Netacno"
+"Netacno"
+
+12. 4 3
+"asdasdasd"
+"Tacno"
+"Netacno"
+"Netacno"
+"Netacno"
+
+
+
+
 

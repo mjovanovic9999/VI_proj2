@@ -1,6 +1,8 @@
 import os
 from tokenize import group
+from csp import answer_graph
 from file_manipulator import read_questions_from_file
+from graph_generator import generate_graph
 from view import read_input_untill_valid, show_start_screen
 
 
@@ -31,6 +33,9 @@ def main() -> None:
 
     number_of_hard_questions = questions_left - number_of_medium_questions
 
+    number_of_combinations = int(read_input_untill_valid(
+        "Unesite broj kombinacija pitanja i odgovora po testu [1-4]", "Broj kombinacija mora broj biti u opsegu od 1 do 4!", lambda x: x.isdigit() and int(x) >= 1 and int(x) <= 4))
+
     question_groups = []
     while not question_groups:
         [question_groups.append(group[0]) for group in question_dict.values(
@@ -46,7 +51,14 @@ def main() -> None:
         if not question_groups:
             print("Izbacili ste sve oblasti!")
 
-    print(question_groups)
+    question_graphs = []
+    while number_of_questions > 0:
+        question_graphs.append(generate_graph(question_dict, number_of_easy_questions, number_of_medium_questions,
+                               number_of_hard_questions, question_groups, number_of_combinations, number_of_questions))
+        number_of_questions -= 1
+
+    combination = answer_graph(question_graphs[0])
+
+    print(combination)
 
 
-main()
