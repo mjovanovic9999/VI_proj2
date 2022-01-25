@@ -1,11 +1,11 @@
 from queue import LifoQueue
 
 
-def answer_graph(graph: dict[tuple[int,int,int], list[tuple[int,int,int]]]) -> list[tuple[tuple[int,int,int],str]]:
+def answer_graph(graph: dict[str, tuple[int, int, str, str, tuple[str, str, str]]]) -> list[tuple[tuple[int,int,int],str]]:
     return depth_first_search(create_graph_with_answer_options(graph), degree_heuristic(graph))
 
 
-def degree_heuristic(graph: dict[tuple[int,int,int], list[tuple[int,int,int]]]) -> list[tuple[int, int, int]]:
+def degree_heuristic(graph: dict[str, tuple[int, int, str, str, tuple[str, str, str]]]) -> list[tuple[int, int, int]]:
     nodes = list(graph.keys())
     nodes.sort(key=lambda node: len(graph[node]), reverse=True)
     return nodes
@@ -28,7 +28,7 @@ def restore_answer_options(graph: dict[tuple[int,int,int], tuple[list[tuple[int,
             graph[neighbor][1].append(answered_node[1])
 
 
-def create_graph_with_answer_options(graph: dict[tuple[int,int,int], list[tuple[int,int,int]]]) -> dict[tuple[int,int,int], tuple[list[tuple[int,int,int]], list[str]]]:
+def create_graph_with_answer_options(graph: dict[str, tuple[int, int, str, str, tuple[str, str, str]]]) -> dict[tuple[int,int,int], tuple[list[tuple[int,int,int]], list[str]]]:
     graph_with_answer_options = {}
     for node in list(graph.keys()):
         graph_with_answer_options[node] = (graph[node], ["A", "B", "C", "D"])
